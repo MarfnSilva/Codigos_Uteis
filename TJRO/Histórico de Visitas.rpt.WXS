@@ -1,0 +1,1235 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="2">
+      <W_Access Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>W_Access</Alias>
+        <ConnectionStringEncrypted>9MDRyWFU+6RpezWlegSkHsRW1QlhW/PFYX3VmGHc4y/ndHetTUtzmONb2Rz0XKRew2D7jEhWsll7SSH0agQlatlYc6FGbfP57XepzGHE9SrkWt0rTQVaxeJhNf1zGK1nnVK168Zdc81waSVMYZQte8Zqtctha/OZ7USh/XwAd8vC0PXJXgPTpGlr7TTktK5njTCtSE5RE51yX+g=</ConnectionStringEncrypted>
+        <Name>W_Access</Name>
+      </W_Access>
+      <W_Access_Events Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>W_Access_Events</Alias>
+        <ConnectionStringEncrypted>9Hhpyc1vS/Fwe6GYdQTg/8RW+QthfTGk7Hu9iPqEaTf+DK2txW17vGlb7dx6XK1ewxbZiUhKu1lvTf3E6QTj28NWc0hOCBrI7WuMBE5MbOfDDHEryU9DxWxNbQR4JfJni15Jq0ZdS81qbeXMapTjetMg/0hbCsP58U0VjW9M7GeNDM8oT3lLCXpc6DTrHKR7xFb1C195u91NCNn9cxjgP4tg</ConnectionStringEncrypted>
+        <Name>W_Access_Events</Name>
+      </W_Access_Events>
+    </Databases>
+    <DataSources isList="true" count="3">
+      <VisitHistory Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>VisitHistory</Alias>
+        <Columns isList="true" count="15">
+          <value>CHID,System.Int32</value>
+          <value>FirstName,System.String</value>
+          <value>IdNumber,System.String</value>
+          <value>AuxText02,System.String</value>
+          <value>VisitorCompany,System.String</value>
+          <value>VisAuxTextA01,System.String</value>
+          <value>OperName,System.String</value>
+          <value>VisitStart,System.DateTime</value>
+          <value>VisitEnd,System.DateTime</value>
+          <value>ClearCode,System.String</value>
+          <value>VisitReason,System.String</value>
+          <value>ContactCHID,System.Int32</value>
+          <value>ContactFirstName,System.String</value>
+          <value>ContactCompany,System.String</value>
+          <value>VisitID,System.Int32</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>VisitHistory</Name>
+        <NameInSource>W_Access_Events</NameInSource>
+        <Parameters isList="true" count="13">
+          <value>_x0040_lblBDV_VisitStart_1_startdate,DateTime.UtcNow.AddMinutes_x0028_-60_x0029_,4,100</value>
+          <value>_x0040_lblBDV_VisitEnd_1_enddate,DateTime.UtcNow,4,100</value>
+          <value>_x0040_Exibir_Fotos,_x0031_,2,1</value>
+          <value>_x0040_lblBDM_FirstName_1,_x0022__x0025__x0022_,22,100</value>
+          <value>_x0040_lblBDM_IdNumber_1,_x0022__x0025__x0022_,22,50</value>
+          <value>_x0040_lblBDA_AuxText02_1,_x0022__x0025__x0022_,22,250</value>
+          <value>_x0040_lblBDM_VisitorCompany_1,_x0022__x0025__x0022_,22,50</value>
+          <value>_x0040_lblBD_ClearCode_1,_x0022__x0025__x0022_,22,20</value>
+          <value>_x0040_lstBDV_VisitReason_1,_x002D_1,8,100</value>
+          <value>_x0040_lblBD_Operator,_x0022__x0025__x0022_,22,50</value>
+          <value>_x0040_lblBDV_ContactFirstName_1,_x0022__x0025__x0022_,22,250</value>
+          <value>_x0040_lstBDM_CompanyID_1,_x002D_1,8,100</value>
+          <value>_x0040_LoadParamsOnly,_x0031_,2,1</value>
+        </Parameters>
+        <SqlCommand>DECLARE
+@strQuery nvarchar(max),
+@ParmDefinition nvarchar(max),
+@ProfileID int,
+@_dte_StartDate datetime,
+@_dte_EndDate datetime,
+@_lblBDV_VisitStart_1_startdate datetime,
+@_lblBDV_VisitEnd_1_enddate datetime,
+@_lblBDM_FirstName_1 varchar(100),
+@_lblBDM_IdNumber_1 varchar(50),
+@_lblBDA_AuxText02_1 varchar(50),
+@_lblBDM_VisitorCompany_1 varchar(50),
+@_lblBD_ClearCode_1 varchar(20),
+@_lstBDV_VisitReason_1 smallint,
+@_lblBD_Operator varchar(50),
+@_lblBDV_ContactFirstName_1 varchar(100),
+@_lstBDM_CompanyID_1 smallint
+
+SET @strQuery = 'SELECT 
+	Visitor.CHID,
+	CASE
+		WHEN Visitor.LastName IS NULL THEN Visitor.FirstName
+		WHEN Visitor.LastName = '''' THEN Visitor.FirstName
+		WHEN (SELECT CfgCOGeneralSettings.CfgValue FROM ' + '{WAccessDBName}' + '..CfgCOGeneralSettings WHERE CfgID = ''Cfg001'') = ''0'' THEN Visitor.FirstName  + '' '' + Visitor.LastName 
+		ELSE Visitor.LastName + '', '' + Visitor.FirstName 
+	END AS FirstName, 
+	VisitHistory.IdNumber, 
+	CHAux.AuxText02,
+	VisitHistory.VisitorCompany,
+	VisitHistory.VisAuxTextA01,
+	VisitHistory.OperName,
+	VisitHistory.VisitStart, 
+	VisitHistory.VisitEnd,
+	VisitHistory.ClearCode,
+	CfgCHComboFields.strlanguage' + CAST({LanguageID} AS char(1)) + ' AS VisitReason,
+	Contact.CHID AS ContactCHID,
+	Contact.FirstName AS ContactFirstName,
+	CHCompanies.CompanyName AS ContactCompany,
+	VisitHistory.VisitID
+FROM ' + '{WAccessDBName}' + '..CHMain Visitor
+JOIN ' + '{WAccessDBName}' + '..CHAux ON  Visitor.CHID = CHAux.CHID
+JOIN ' + '{WAccessEventsDBName}' + '..VisitHistory ON Visitor.CHID = VisitHistory.CHID
+LEFT JOIN ' + '{WAccessEventsDBName}' + '..VisitHistoryContacts ON VisitHistory.VisitID = VisitHistoryContacts.VisitID 
+LEFT JOIN ' + '{WAccessDBName}' + '..CfgCHComboFields ON VisitHistory.VisitReason = CfgCHComboFields.ComboIndex AND FieldID = ''lstBDV_VisitReason'' AND CfgCHComboFields.CHType = Visitor.CHType 
+JOIN ' + '{WAccessDBName}' + '..CfgSYPartitions ON CfgSYPartitions.PartitionID = Visitor.PartitionID
+JOIN ' + '{WAccessDBName}' + '..CfgSYProfilePartitionsAndPermissions ON CfgSYPartitions.PartitionID = CfgSYProfilePartitionsAndPermissions.PartitionID
+JOIN ' + '{WAccessDBName}' + '..CfgSYPermissionSets ON CfgSYPermissionSets.PermissionSetID = CfgSYProfilePartitionsAndPermissions.PermissionSetID
+LEFT JOIN ' + '{WAccessDBName}' + '..CHMain Contact ON Contact.CHID = (SELECT CASE (SELECT CfgValue FROM ' + '{WAccessDBName}' + '..CfgCOGeneralSettings WHERE CfgID = ''Vis015'')
+    																						WHEN 1 THEN VisitHistoryContacts.ContactCHID
+																							ELSE VisitHistory.ContactCHID
+																						END AS ContactCHID)
+LEFT JOIN ' + '{WAccessDBName}' + '..CHCompanies ON CHCompanies.CompanyID = Contact.CompanyID
+WHERE ProfileID = @ProfileID AND CfgSYPermissionSets.CHType = Visitor.CHType AND PermissionID = ''CHC0001''
+AND VisitHistory.VisitStart &gt;= @_lblBDV_VisitStart_1_startdate AND VisitHistory.VisitEnd &lt;= @_lblBDV_VisitEnd_1_enddate'
+
+IF @lblBDM_FirstName_1 &lt;&gt; '%'
+SET @strQuery = @strQuery + ' AND Visitor.FirstName LIKE @_lblBDM_FirstName_1'
+
+IF @lblBDM_IdNumber_1 &lt;&gt; '%'
+SET @strQuery = @strQuery + ' AND VisitHistory.IdNumber LIKE @_lblBDM_IdNumber_1'
+
+IF @lblBDA_AuxText02_1 &lt;&gt; '%'
+SET @strQuery = @strQuery + ' AND CHAux.AuxText02 LIKE @_lblBDA_AuxText02_1'
+
+IF @lblBDM_VisitorCompany_1 &lt;&gt; '%'
+SET @strQuery = @strQuery + ' AND VisitHistory.VisitorCompany LIKE @_lblBDM_VisitorCompany_1'
+
+IF @lblBD_ClearCode_1 &lt;&gt; '%'
+SET @strQuery = @strQuery + ' AND VisitHistory.CLearCode LIKE @_lblBD_ClearCode_1'
+
+IF @lstBDV_VisitReason_1 &gt; -1
+SET @strQuery = @strQuery + ' AND VisitHistory.VisitReason = @_lstBDV_VisitReason_1'
+
+IF @lblBD_Operator &lt;&gt; '%'
+SET @strQuery = @strQuery + ' AND VisitHistory.OperName LIKE @_lblBD_Operator'
+
+IF @lblBDV_ContactFirstName_1 &lt;&gt; '%'
+SET @strQuery = @strQuery + ' AND Contact.FirstName LIKE @_lblBDV_ContactFirstName_1'
+
+IF @lstBDM_CompanyID_1 &gt; -1
+SET @strQuery = @strQuery + ' AND CHCompanies.CompanyID = @_lstBDM_CompanyID_1'
+
+SET @strQuery = @strQuery + ' ORDER BY VisitHistory.VisitStart'
+
+SET @ParmDefinition = N'@ProfileID int,
+						@_lblBDV_VisitStart_1_startdate datetime,
+						@_lblBDV_VisitEnd_1_enddate datetime,
+						@_lblBDM_FirstName_1 varchar(100),
+						@_lblBDM_IdNumber_1 varchar(50),
+						@_lblBDA_AuxText02_1 varchar(50),
+						@_lblBDM_VisitorCompany_1 varchar(50),
+						@_lblBD_ClearCode_1 varchar(20),
+						@_lstBDV_VisitReason_1 smallint,
+						@_lblBD_Operator varchar(50),
+						@_lblBDV_ContactFirstName_1 varchar(100),
+						@_lstBDM_CompanyID_1 smallint';
+
+IF @LoadParamsOnly = 0
+	EXECUTE sp_executesql @strQuery, @ParmDefinition,
+						@ProfileID = {ProfileID},
+						@_lblBDV_VisitStart_1_startdate = @lblBDV_VisitStart_1_startdate, 
+						@_lblBDV_VisitEnd_1_enddate = @lblBDV_VisitEnd_1_enddate,
+						@_lblBDM_FirstName_1 = @lblBDM_FirstName_1,
+						@_lblBDM_IdNumber_1 = @lblBDM_IdNumber_1,
+						@_lblBDA_AuxText02_1 = @lblBDA_AuxText02_1,
+						@_lblBDM_VisitorCompany_1 = @lblBDM_VisitorCompany_1,
+						@_lblBD_ClearCode_1 = @lblBD_ClearCode_1,						
+						@_lstBDV_VisitReason_1 = @lstBDV_VisitReason_1,
+						@_lblBD_Operator = @lblBD_Operator,
+						@_lblBDV_ContactFirstName_1 = @lblBDV_ContactFirstName_1,
+						@_lstBDM_CompanyID_1 = @lstBDM_CompanyID_1;</SqlCommand>
+      </VisitHistory>
+      <CfgCHComboFields Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>CfgCHComboFields</Alias>
+        <Columns isList="true" count="1">
+          <value>VisitReason,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>CfgCHComboFields</Name>
+        <NameInSource>W_Access</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_lstBDV_VisitReason_1,_x002D_1,8,255</value>
+        </Parameters>
+        <SqlCommand>SELECT
+	CASE
+	WHEN @lstBDV_VisitReason_1 = -1 AND {LanguageID} = 1 THEN 'Not Selected'
+	WHEN @lstBDV_VisitReason_1 = -1 AND {LanguageID} = 2 THEN 'Não Selecionado'
+	ELSE
+	(SELECT CASE
+			WHEN {LanguageID} = 1 THEN strLanguage1 
+			WHEN {LanguageID} = 2 THEN strLanguage2
+			WHEN {LanguageID} = 3 THEN strLanguage3
+			WHEN {LanguageID} = 4 THEN strLanguage4
+		END	AS VisitReason
+	FROM CfgCHComboFields
+	WHERE ComboIndex = @lstBDV_VisitReason_1
+	AND FieldID = 'lstBDV_VisitReason'
+	AND CHType = 1)
+
+END AS VisitReason</SqlCommand>
+      </CfgCHComboFields>
+      <CHCompanies Ref="6" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>CHCompanies</Alias>
+        <Columns isList="true" count="1">
+          <value>CompanyName,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>CHCompanies</Name>
+        <NameInSource>W_Access</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_lstBDM_CompanyID_1,_x002D_1,8,100</value>
+        </Parameters>
+        <SqlCommand>SELECT
+	CASE
+		WHEN @lstBDM_CompanyID_1 = -1 AND {LanguageID} = 1 THEN 'Not Selected'
+		WHEN @lstBDM_CompanyID_1 = -1 AND {LanguageID} = 2 THEN 'Não Selecionado'
+	ELSE
+		(SELECT 
+			CompanyName 
+		FROM CHCompanies
+		WHERE CompanyID = @lstBDM_CompanyID_1)
+	END AS CompanyName</SqlCommand>
+      </CHCompanies>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="8">
+      <value>W-Access,ServerName,ServerName,,System.String,NSP-USU0101,False,False,False,False</value>
+      <value>W-Access,ApplicationName,ApplicationName,,System.String,W-Access,False,False,False,False</value>
+      <value>W-Access,ClientTimeZone,ClientTimeZone,,System.Int32,_x002D_180,False,False,False,False</value>
+      <value>W-Access,LanguageID,LanguageID,,System.Int32,_x0033_,False,False,False,False</value>
+      <value>W-Access,OperName,OperName,,System.String,Admin,False,False,False,False</value>
+      <value>W-Access,ProfileID,ProfileID,,System.Int32,_x0031_,False,False,False,False</value>
+      <value>W-Access,WAccessDBName,WAccessDBName,,System.String,W_Access,False,False,False,False</value>
+      <value>W-Access,WAccessEventsDBName,WAccessEventsDBName,,System.String,W_Access_Events,False,False,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV1</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="7" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="5">
+        <PageHeader1 Ref="8" type="PageHeaderBand" isKey="true">
+          <Border>Bottom;[255:133:0];3;Solid;False;3;[255:133:0]</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,1.2</ClientRectangle>
+          <Components isList="true" count="2">
+            <Image1 Ref="9" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,0,9.86,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <HorAlignment>Right</HorAlignment>
+              <ImageURL>http://{ServerName}/{ApplicationName}//Img/W-AccessLogo.JPG</ImageURL>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image1</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Smoothing>False</Smoothing>
+              <VertAlignment>Center</VertAlignment>
+            </Image1>
+            <lbl_ReportTitle Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,9.14,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,14.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lbl_ReportTitle</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>Histórico de Visitas
+</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lbl_ReportTitle>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeader1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+        </PageHeader1>
+        <PageFooter1 Ref="11" type="PageFooterBand" isKey="true">
+          <Border>Top;[255:133:0];3;Solid;False;3;[255:133:0]</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,27.2,19,0.5</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text10 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.14,0.1,3.86,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{IIF(LanguageID==1,"Page "+PageNumber+" of "+TotalPageCount,"")}{IIF(LanguageID==2,"Página "+PageNumber+" de "+TotalPageCount,"")}{IIF(LanguageID==3,"Página "+PageNumber+" de "+TotalPageCount,"")}{IIF(LanguageID==4,"Page "+PageNumber+" of "+TotalPageCount,"")}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text14 Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.1,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{Time}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text3 Ref="14" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3,0.1,12.14,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>aa1db14f2b744591b4c1251236fcded9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text> {IIF(LanguageID==1,"Operator:  ","")}{IIF(LanguageID==2,"Operador:  ","")}{IIF(LanguageID==3,"Operador:  ","")}{IIF(LanguageID==4,"Operator:  ","")}{OperName}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageFooter1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+        </PageFooter1>
+        <Header1 Ref="15" type="HeaderBand" isKey="true">
+          <Border>Bottom;[255:133:0];3;Solid;False;3;[255:133:0]</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,2.4,19,3.4</ClientRectangle>
+          <Components isList="true" count="26">
+            <Text25 Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.2,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,9.75,Bold,Point,False,0</Font>
+              <Guid>e1118faee51448f5b34805a195d22738</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>{IIF(LanguageID==1,"Parameters:","")}{IIF(LanguageID==2,"Parâmetros:","")}{IIF(LanguageID==3,"Parámetros:","")}{IIF(LanguageID==4,"Parameters:","")}
+</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <lblBDV_VisitStart_1 Ref="17" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.8,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>6c90e507b638412b80b1b61e98f34222</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDV_VisitStart_1</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Início da Visita:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_VisitStart_1>
+            <Text35 Ref="18" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,0.8,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{((System.DateTime)VisitHistory.Parameters["@lblBDV_VisitStart_1_startdate"].ParameterValue).AddMinutes(ClientTimeZone)}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text35>
+            <lblBDM_FirstName_1 Ref="19" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.2,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>93c2dc33bcc14fb5a3ad9b4276c947cd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDM_FirstName_1</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Nome do visitante:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDM_FirstName_1>
+            <Text37 Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,1.2,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{((string)VisitHistory.Parameters["@lblBDM_FirstName_1"].ParameterValue).Replace("%", "*")}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text37>
+            <lblBDM_VisitorCompany_1 Ref="21" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,2.4,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>e4320942401f4e3aac31ee2c1609a311</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDM_VisitorCompany_1</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Empresa:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDM_VisitorCompany_1>
+            <Text28 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,2.4,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{((string)VisitHistory.Parameters["@lblBDM_VisitorCompany_1"].ParameterValue).Replace("%", "*")}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+            <lblBDM_IdNumber_1 Ref="23" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.6,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>2a31db21f2e34739ba4d5020e8ce2593</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDM_IdNumber_1</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Documento:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDM_IdNumber_1>
+            <Text30 Ref="24" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,1.6,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{((string)VisitHistory.Parameters["@lblBDM_IdNumber_1"].ParameterValue).Replace("%", "*")}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text30>
+            <lblBD_ClearCode_1 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,1.2,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>24a5829cda5a4af59db1ab6676e6fffd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBD_ClearCode_1</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Cartão:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBD_ClearCode_1>
+            <Text32 Ref="26" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,0.8,6.86,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{((System.DateTime)VisitHistory.Parameters["@lblBDV_VisitEnd_1_enddate"].ParameterValue).AddMinutes(ClientTimeZone)}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text32>
+            <lblBDV_VisitEnd_1 Ref="27" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,0.8,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>160b5839e5f642e1859106f64ff5752b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDV_VisitEnd_1</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Fim da Visita:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_VisitEnd_1>
+            <Text2 Ref="28" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,1.2,6.86,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>59724d8403f2496197d5037699da4f1b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{((string)VisitHistory.Parameters["@lblBD_ClearCode_1"].ParameterValue).Replace("%", "*")}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <lblBD_Operator_0 Ref="29" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,2,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>477879d6cb3c4bfbab8c061051a14536</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBD_Operator_0</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Operador:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBD_Operator_0>
+            <Text4 Ref="30" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,2,6.86,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>b6254739906845669d042a8d7ef78542</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{((string)VisitHistory.Parameters["@lblBD_Operator"].ParameterValue).Replace("%", "*")}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text8 Ref="31" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,0.2,6.86,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>cf36e88dc088472a993c9e2dccb789b7</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>{Count()} {IIF(LanguageID==1,"Result(s)","")}{IIF(LanguageID==2,"Resultado(s)","")}{IIF(LanguageID==3,"Resultado(s)","")}{IIF(LanguageID==4,"Result(s)","")}
+</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text12 Ref="32" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,2.8,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>7c5f5f66cd2f450b834807767698d74f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{IIF(LanguageID==1,"View Photos:","")}{IIF(LanguageID==2,"Exibir Fotos:","")}{IIF(LanguageID==3,"Ver Fotos:","")}{IIF(LanguageID==4,"View Photos:","")}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text16 Ref="33" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,2.8,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>aaa7196d3194444b897735f54bd99f96</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{IIF((int)VisitHistory.Parameters["@Exibir_Fotos"].ParameterValue == 1,(IIF(LanguageID==1,"Yes","Sim")),(IIF(LanguageID==1,"No","Não")))}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <lblBDA_AuxText02_1 Ref="34" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,2,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>beca4a0bd8ba4bf6b49672b24b39d7e9</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDA_AuxText02_1</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Telefone de contato:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDA_AuxText02_1>
+            <Text42 Ref="35" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,2,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text42</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{((string)VisitHistory.Parameters["@lblBDA_AuxText02_1"].ParameterValue).Replace("%", "*")}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text42>
+            <lblBDV_VisitReason_1 Ref="36" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,1.6,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>ec12435e6c0044308fe85650f75c61de</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDV_VisitReason_1</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Motivo da Visita:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_VisitReason_1>
+            <Text45 Ref="37" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,1.6,6.86,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text45</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{CfgCHComboFields.VisitReason}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text45>
+            <lblBDV_ContactFirstName_1 Ref="38" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,2.4,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>8b98f9e810ec4e5aa82a0e9a28aeb043</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDV_ContactFirstName_1</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Contato:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_ContactFirstName_1>
+            <Text27 Ref="39" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,2.4,6.86,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>228eb02e6c4a4b459652cbd553c8c579</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{((string)VisitHistory.Parameters["@lblBDV_ContactFirstName_1"].ParameterValue).Replace("%", "*")}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <lblBDM_CompanyID_1 Ref="40" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,2.8,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>67fb9c663e4d40a4863e8519272fe79d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDM_CompanyID_1</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <PrintOn>OnlyFirstPage</PrintOn>
+              <Text>Empresa:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDM_CompanyID_1>
+            <Text20 Ref="41" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,2.8,6.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>5f415af48a5e4f8b9fdb350ff6de1db4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="7" />
+              <Parent isRef="15" />
+              <Text>{CHCompanies.CompanyName}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>Header1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <PrintIfEmpty>True</PrintIfEmpty>
+          <PrintOn>OnlyFirstPage</PrintOn>
+          <PrintOnAllPages>False</PrintOnAllPages>
+        </Header1>
+        <GroupHeaderBand1 Ref="42" type="GroupHeaderBand" isKey="true">
+          <Border>Top;[255:133:0];3;Solid;False;3;[255:133:0]</Border>
+          <Brush>Gainsboro</Brush>
+          <ClientRectangle>0,6.6,19,2.2</ClientRectangle>
+          <Components isList="true" count="21">
+            <Text1 Ref="43" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,0.1,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <MinSize>0,0.4</MinSize>
+              <Name>Text1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>{VisitHistory.FirstName}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text5 Ref="44" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,0.5,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <MinSize>0,0.4</MinSize>
+              <Name>Text5</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>{VisitHistory.IdNumber}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text7 Ref="45" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,0.9,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <MinSize>0,0.4</MinSize>
+              <Name>Text7</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>{VisitHistory.AuxText02}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text11 Ref="46" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,1.3,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <MinSize>0,0.4</MinSize>
+              <Name>Text11</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>{VisitHistory.VisitorCompany}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <lblBDV_FirstName_1__1 Ref="47" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.1,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDV_FirstName_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>Nome:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_FirstName_1__1>
+            <lblBDV_IdNumber_1__1 Ref="48" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.5,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDV_IdNumber_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>Documento:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_IdNumber_1__1>
+            <lblBDA_AuxText02_1__1 Ref="49" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.9,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDA_AuxText02_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>Telefone de contato:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDA_AuxText02_1__1>
+            <lblBDM_VisitorCompany_1__1 Ref="50" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.3,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDM_VisitorCompany_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>Empresa do visitante:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDM_VisitorCompany_1__1>
+            <Image2 Ref="51" type="Image" isKey="true">
+              <AspectRatio>True</AspectRatio>
+              <BeforePrintEvent>if((int)VisitHistory.Parameters["@Exibir_Fotos"].ParameterValue == 1)
+{
+Image2.Enabled = true;
+}
+else
+{
+Image2.Enabled = false;
+}</BeforePrintEvent>
+              <Brush>Gainsboro</Brush>
+              <ClientRectangle>16.34,0.1,2.66,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Enabled>False</Enabled>
+              <HorAlignment>Center</HorAlignment>
+              <ImageURL>http://{ServerName}/{ApplicationName}/PhotoID/Photo_1/{VisitHistory.CHID}_1.JPG
+</ImageURL>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image2</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Stretch>True</Stretch>
+              <VertAlignment>Center</VertAlignment>
+            </Image2>
+            <lblBDV_VisitReason_1__1 Ref="52" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,1.7,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDV_VisitReason_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>Motivo da Visita:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_VisitReason_1__1>
+            <Text17 Ref="53" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,1.7,4.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>{VisitHistory.VisitReason}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text15 Ref="54" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,0.5,4.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>{VisitHistory.VisitStart.AddMinutes(+ClientTimeZone)}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <lblBDV_VisitStart_1__1 Ref="55" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,0.5,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDV_VisitStart_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>Início da Visita:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_VisitStart_1__1>
+            <Text19 Ref="56" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,0.9,4.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>{VisitHistory.VisitEnd.AddMinutes(+ClientTimeZone)}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <lblBDV_VisitEnd_1__1 Ref="57" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,0.9,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDV_VisitEnd_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>Fim da Visita:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_VisitEnd_1__1>
+            <lblBD_ClearCode_1__1 Ref="58" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,1.3,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBD_ClearCode_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>Número do Cartão:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBD_ClearCode_1__1>
+            <Text21 Ref="59" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,1.3,4.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>{VisitHistory.ClearCode}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <lblBD_Operator_0__1 Ref="60" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,0.1,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBD_Operator_0__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>Operador:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBD_Operator_0__1>
+            <Text23 Ref="61" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,0.1,4.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>{VisitHistory.OperName}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <lblBDV_VisAuxTextA01_1__1 Ref="62" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.7,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Editable>True</Editable>
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>3,2.4</MaxSize>
+              <MinSize>0,0.4</MinSize>
+              <Name>lblBDV_VisAuxTextA01_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>Observações:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_VisAuxTextA01_1__1>
+            <Text13 Ref="63" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,1.7,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <MinSize>0,0.4</MinSize>
+              <Name>Text13</Name>
+              <Page isRef="7" />
+              <Parent isRef="42" />
+              <Text>{VisitHistory.VisAuxTextA01}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+          </Components>
+          <Condition>{VisitHistory.VisitID}</Condition>
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+        </GroupHeaderBand1>
+        <Data_VisitHistory Ref="64" type="DataBand" isKey="true">
+          <Border>Top;Black;1;Solid;False;1;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,9.6,19,0.4</ClientRectangle>
+          <Components isList="true" count="4">
+            <lblBDV_ContactFirstName_1__1 Ref="65" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,3.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDV_ContactFirstName_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="64" />
+              <Text>Nome do Contato:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDV_ContactFirstName_1__1>
+            <Text9 Ref="66" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,0,5.74,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Margins>0,0,0,0</Margins>
+              <MinSize>0,0.4</MinSize>
+              <Name>Text9</Name>
+              <Page isRef="7" />
+              <Parent isRef="64" />
+              <Text>{VisitHistory.ContactFirstName}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <lblBDM_CompanyID_1__1 Ref="67" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.14,0,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>ca81646a5d1e45f1b4615f7e9d5da924</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>lblBDM_CompanyID_1__1</Name>
+              <Page isRef="7" />
+              <Parent isRef="64" />
+              <Text>Empresa:</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </lblBDM_CompanyID_1__1>
+            <Text6 Ref="68" type="Text" isKey="true">
+              <Border>None;OrangeRed;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.14,0,6.86,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Verdana,8.25,Regular,Point,False,0</Font>
+              <Guid>34415e37f1c64b1585a39180c8914e57</Guid>
+              <Margins>0,0,0,0</Margins>
+              <MinSize>0,0.4</MinSize>
+              <Name>Text6</Name>
+              <Page isRef="7" />
+              <Parent isRef="64" />
+              <Text>{VisitHistory.ContactCompany}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>VisitHistory</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>Data_VisitHistory</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Sort isList="true" count="0" />
+        </Data_VisitHistory>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>fb03cfefe4c440e29df83bfedd946bf5</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="69" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="70" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>6/19/2020 1:24:57 AM</ReportChanged>
+  <ReportCreated>7/22/2008 5:50:50 PM</ReportCreated>
+  <ReportFile />
+  <ReportGuid>f43ddd67de9f46f4af89c79ed4afd8ae</ReportGuid>
+  <ReportImage isNull="true" />
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2018.1.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        
+        public Report()
+        {
+            this.InitializeComponent();
+        }
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="1">
+    <Odd Ref="71" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Brush>Gainsboro</Brush>
+      <Conditions isList="true" count="0" />
+      <Font>Arial,8</Font>
+      <Name>Odd</Name>
+      <TextBrush>Black</TextBrush>
+    </Odd>
+  </Styles>
+</StiSerializer>

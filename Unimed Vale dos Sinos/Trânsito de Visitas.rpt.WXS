@@ -1,0 +1,666 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="2">
+      <W_Access Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>W_Access</Alias>
+        <ConnectionStringEncrypted>9MDLyWFK+6RpezVsTgSkesTWacthXfPFaQbVmGHc4y/ndEmtX0tzmO1b2YRLXKRew177aEhWsllqTSH0RQTketlYT6FGD/OkcmmpBHzEbirkWnsr1gVabeJBNdx8GDJ70VK1q8ZKc81wd6hMaMwlRuVW0ctNWTHF7USlBGIAYT/cfPWKXl3TpENr7clFAK4b6HT5K1RX0u10TQ==</ConnectionStringEncrypted>
+        <Key>2b18207440df4711807bc00d300e23a3</Key>
+        <Name>W_Access</Name>
+      </W_Access>
+      <W_Access_Events Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>W_Access_Events</Alias>
+        <ConnectionStringEncrypted>9Hi9yc1KS5lwe6GYdQR3EsTW+ShhfTHFbx+9iPqEaTeBDK2txW17GXtb7dzLXK1ew3jZKEhg81ngTc3EegT329VWe0hOFvPNYWsVpU5MbufDyHEraU9DAeJLpdx4JbRn3CBJq8Zdec3se+XMYpTjF8Ty/0hbFfP5dFsVmG9M5CfDcM8oVHnzvMtc6L1pzGVG8zhPiOV5S03tRKGI6RjgE8M=</ConnectionStringEncrypted>
+        <Key>dcd2e89bce4b433e8dde920fc6962939</Key>
+        <Name>W_Access_Events</Name>
+      </W_Access_Events>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <Events Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Events</Alias>
+        <Columns isList="true" count="12">
+          <value>ORIGINAL,EventDateTime,EventDateTime,EventDateTime,System.DateTime,_x0033_c54d94276054e648270634f23975364</value>
+          <value>ORIGINAL,Firstname,Firstname,Firstname,System.String,_x0039_3a31c77b1a64cd399f5c3b9140bf6e2</value>
+          <value>ORIGINAL,DiaMes,DiaMes,DiaMes,System.String,_x0035_c9806f3e83b4c5dbb3cdf87064ff8dd</value>
+          <value>ORIGINAL,Hora,Hora,Hora,System.String,_x0030_b4d42a903ce4da0ae2a5de2ef57ca56</value>
+          <value>ORIGINAL,Matricula,Matricula,Matricula,System.String,_x0035_3d8bbb537814f5ba1dc671adc728efd</value>
+          <value>ORIGINAL,CPF,CPF,CPF,System.String,cf64c4cb5a424088b4f57a95db10a85e</value>
+          <value>ORIGINAL,CHType,CHType,CHType,System.String,_x0032_16d183713284d678949d3cc444c97ef</value>
+          <value>ORIGINAL,tipo,tipo,tipo,System.String,ac8071a38d484a55992825027970406e</value>
+          <value>ORIGINAL,Leitora,Leitora,Leitora,System.String,_x0033_7afb2053aa24cbd924d3d82e890ac64</value>
+          <value>ORIGINAL,evento,evento,evento,System.String,da5b7b1aea8c4b72b46bd57b6f77ef56</value>
+          <value>ORIGINAL,CHState,CHState,CHState,System.String,b6a41daed1234cb6926c713b002bd404</value>
+          <value>ORIGINAL,Atendimento,Atendimento,Atendimento,System.String,_x0032_cf4dd9e48be4908a64c5937c880404f</value>
+        </Columns>
+        <CommandTimeout>90</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>a20507c2e58c47ea9f3e5ccc8359fef6</Key>
+        <Name>Events</Name>
+        <NameInSource>W_Access_Events</NameInSource>
+        <Parameters isList="true" count="9">
+          <value>_x0040_lblBD_StartTime_StartDate,Today.AddDays_x0028_-30_x0029_,4,100,a37b9f4f2aff490880532c731bbf7d23</value>
+          <value>_x0040_lblBD_EndTime_EndDate,Today,4,100,631b3b31315d466faa4f21ad27cae54e</value>
+          <value>_x0040_LoadParamsOnly,_x0031_,2,1</value>
+          <value>_x0040_lstBDA_AuxLst14_4,_x002D_1,8,10</value>
+          <value>_x0040_Atendimento,_x0022__x0025__x0022_,22,250</value>
+          <value>_x0040_lstBDA_AuxLst07_1,_x002D_1,8,500</value>
+          <value>_x0040_lstBD_CHState,_x002D_1,8,100</value>
+          <value>_x0040_lblBDM_IdNumber_2,_x0022__x0025__x0022_,22,250</value>
+          <value>_x0040_lstChkBD_CHID,_x0022_-1_x0022_,22,250</value>
+        </Parameters>
+        <SqlCommand>DECLARE
+@strQuery 						nvarchar(max),
+@ParmDefinition 				nvarchar(max),
+@_lblBD_StartTime_StartDate 	datetime,
+@_lstBD_CHState 				smallint,
+@_lblBDM_IdNumber_2 			varchar(250),
+@_lblBDA_AuxText15_2 			varchar(250),
+@_lblBDA_AuxText14_2 			varchar(250),
+@_lstBDA_AuxLst01_2				 smallint,
+@_lstBDA_AuxLst07_1				 smallint,
+@_lstBDA_AuxLst02_2				 smallint,
+@_lstBDA_AuxLst05_2				 smallint,
+@_lstBDA_AuxLst14_4				int	,
+@_Atendimento					varchar(250),
+@_lblBD_EndTime_EndDate 		datetime
+	
+SET @strQuery =
+
+'
+WITH Main AS (
+
+SELECT 
+	Events.CHID,
+	Events.Firstname,
+	CHMain.IdNumber AS CPF,
+	combo_tipo.StrLanguage2	AS Tipo,
+	CfgHWEvents.strLanguage2 AS evento,
+	Events.GMTOffset,
+	CfgCHTypes.strLanguage2 AS CHType,
+	Events.SourceName AS Leitora,
+	combo_CHState.StrLanguage2 AS CHState,
+	events.eventDateTIme as EventDateTime,
+	CAST(dateadd(MINUTE, Events.GMTOffset, eventdatetime) as date) AS DiaMes, 
+	FORMAT(dateadd(MINUTE, Events.GMTOffset, eventdatetime),''HH:mm:ss'') AS Hora,
+	VisAuxText01 AS Atendimento
+
+FROM Events
+LEFT JOIN W_Access..CHMain ON CHMain.CHID = Events.CHID 
+LEFT JOIN W_Access..CHCompanies on CHMain.CompanyID = CHCompanies.CompanyID
+LEFT JOIN W_Access..CHAux on CHMain.CHID = CHAux.CHID
+JOIN W_Access..CfgCHTypes ON CfgCHTypes.CHType = Events.CHType
+LEFT JOIN W_Access..CfgCHComboFields combo_area ON CHAux.AuxLst01 = combo_area.ComboIndex AND combo_area.FieldID = ''lstBDA_AuxLst01'' AND combo_area.CHType = CHMain.CHType
+LEFT JOIN W_Access..CfgCHComboFields combo_tipo ON CHAux.AuxLst07 = combo_tipo.ComboIndex AND combo_tipo.FieldID = ''lstBDA_AuxLst07'' AND combo_tipo.CHType = CHMain.CHType
+LEFT JOIN W_Access..CfgCHComboFields combo_CHState ON CHMain.CHState = combo_CHState.ComboIndex AND combo_CHState.FieldID = ''lstBD_CHState''
+JOIN W_Access..CfgHWEvents ON CfgHWEvents.EventHWID = Events.EventHWID
+LEFT JOIN VisitHistory ON (Events.CHID = VisitHistory.CHID AND EventDateTime between VisitStart AND VisitEnd)
+WHERE W_ACCESS_Events..Events.EventType = 1
+	AND CHMain.CHType in (1, 7)
+	AND Events.EventHWID &lt;&gt; 150
+	AND Events.EventHWID in (71, 73, 75) 
+	AND Events.EventDateTime BETWEEN @_lblBD_StartTime_StartDate AND @_lblBD_EndTime_EndDate
+
+'
+IF @lstBDA_AuxLst07_1 &gt; -1
+SET @strQuery = @strQuery + ' AND CHAux.AuxLst07 = @_lstBDA_AuxLst07_1 '
+
+IF @lblBDM_IdNumber_2 &lt;&gt; '%'
+SET @strQuery = @strQuery+ ' AND ' + ' W_ACCESS_Events..VisitHistory.IdNumber LIKE @_lblBDM_IdNumber_2 '
+
+IF @lstChkBD_CHID &lt;&gt; '-1'
+SET @strQuery = @strQuery + ' AND W_ACCESS..CHMain.CHID IN (' + @lstChkBD_CHID + ') '
+
+
+SET @strQuery = @strQuery + ')
+
+SELECT  Atendimento, EventDateTime, DiaMes , Hora, Firstname, CPF, CHType, tipo, Leitora, evento, CHState FROM Main
+	WHERE 1 = 1
+'
+
+
+IF @lstBDA_AuxLst14_4 = 0 
+SET @strQuery = @strQuery + ' AND CHType like ''Visitante'' '
+
+IF @lstBDA_AuxLst14_4 = 1 
+SET @strQuery = @strQuery + ' AND CHType like ''Paciente'' '
+
+IF @Atendimento &lt;&gt; '%'
+SET @strQuery = @strQuery + ' AND Atendimento like @_Atendimento '
+
+
+
+
+SET @strQuery = @strQuery + ' GROUP BY EventDateTime, DiaMes, Hora, Main.Firstname, CPF, CHType, tipo, Leitora, evento, CHState, Atendimento '
+
+SET @ParmDefinition = N'@_lblBD_StartTime_StartDate datetime,
+						@_lstBDA_AuxLst14_4	int,
+						@_Atendimento varchar(50),
+						@_lstBDA_AuxLst07_1 smallint,
+						@_lstBD_CHState smallint,
+						@_lblBDM_IdNumber_2 varchar(250),
+						@_lblBD_EndTime_EndDate datetime';
+
+IF @LoadParamsOnly = 0
+	EXECUTE sp_executesql @strQuery, @ParmDefinition,
+						@_lblBD_StartTime_StartDate = @lblBD_StartTime_StartDate, 
+						@_lstBDA_AuxLst14_4 = @lstBDA_AuxLst14_4,
+						@_lstBDA_AuxLst07_1 = @lstBDA_AuxLst07_1,
+						@_lstBD_CHState = @lstBD_CHState,
+						@_Atendimento = @Atendimento,
+						@_lblBDM_IdNumber_2 = @lblBDM_IdNumber_2,
+						@_lblBD_EndTime_EndDate = @lblBD_EndTime_EndDate;</SqlCommand>
+      </Events>
+      <CfgCHComboFields Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>CfgCHComboFields</Alias>
+        <Columns isList="true" count="1">
+          <value>CHState,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>dfa63fc4f70e433e862186d9057361ec</Key>
+        <Name>CfgCHComboFields</Name>
+        <NameInSource>W_Access</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_lstBD_CHState,_x002D_1,8,600</value>
+        </Parameters>
+        <SqlCommand>SELECT
+	CASE 
+	WHEN @lstBD_CHState = -1 AND {LanguageID} = 1 THEN 'Not Selected'
+	WHEN @lstBD_CHState = -1 AND {LanguageID} = 2 THEN 'Não Selecionado'
+	ELSE
+(SELECT CASE
+				WHEN {LanguageID} = 1 THEN strLanguage1 
+				WHEN {LanguageID} = 2 THEN strLanguage2
+				WHEN {LanguageID} = 3 THEN strLanguage3
+				WHEN {LanguageID} = 4 THEN strLanguage4
+		END	AS CHStatus
+	FROM CfgCHComboFields
+	WHERE FieldID = 'lstBD_CHState'
+	AND ComboIndex = @lstBD_CHState)
+END AS CHStatus</SqlCommand>
+      </CfgCHComboFields>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="8">
+      <value>W-Access,ServerName,ServerName,,System.String,w-access.unimedvs.com.br,False,False,False,False</value>
+      <value>W-Access,ApplicationName,ApplicationName,,System.String,W-Access,False,False,False,False</value>
+      <value>W-Access,ClientTimeZone,ClientTimeZone,,System.Int32,_x002D_180,False,False,False,False</value>
+      <value>W-Access,OperName,OperName,,System.String,Invenzi,False,False,False,False</value>
+      <value>W-Access,ProfileID,ProfileID,,System.Int32,_x0031_,False,False,False,False</value>
+      <value>W-Access,LanguageID,LanguageID,,System.Int32,_x0032_,False,False,False,False</value>
+      <value>W-Access,WAccessDBName,WAccessDBName,,System.String,W_Access,False,False,False,False</value>
+      <value>W-Access,WAccessEventsDBName,WAccessEventsDBName,,System.String,W_Access_Events,False,False,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV1</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>306c04bb66334167a2281bbf0e8880c1</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="6" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="3">
+        <PageHeaderBand1 Ref="7" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,27.7,0.51</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text22 Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,9.91,0.76</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,18,Bold</Font>
+              <Guid>fd786dcc38c943ff838de06472730e2d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Transito Visitantes</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text22>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>13fb103fd7554b95a7e54a7fa3db8b65</Guid>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <PrintOn>OnlyFirstPage</PrintOn>
+        </PageHeaderBand1>
+        <GroupHeaderBand1 Ref="9" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <CanBreak>True</CanBreak>
+          <ClientRectangle>0,1.71,27.7,0.45</ClientRectangle>
+          <Components isList="true" count="9">
+            <Text6 Ref="10" type="Text" isKey="true">
+              <Brush>[250:192:143]</Brush>
+              <ClientRectangle>12.9,0,3.2,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <Guid>a605bbef0f4c439e9353c1605acf4e34</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Text>Tipo do Usuário</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text25 Ref="11" type="Text" isKey="true">
+              <Brush>[250:192:143]</Brush>
+              <ClientRectangle>7.2,0,2.7,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <Guid>7d88aac83a6f45339685efc076c9b80a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Text>CPF</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text3 Ref="12" type="Text" isKey="true">
+              <Brush>[250:192:143]</Brush>
+              <ClientRectangle>2.8,0,4.4,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <Guid>31ec3912f2ef45e09cc7efb5621fc33e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Text>Nome</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text7 Ref="13" type="Text" isKey="true">
+              <Brush>[250:192:143]</Brush>
+              <ClientRectangle>0,0,1.3,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <Guid>dc4ce1f1139f4f63aee7863851245521</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Text>Data</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text17 Ref="14" type="Text" isKey="true">
+              <Brush>[250:192:143]</Brush>
+              <ClientRectangle>1.3,0,1.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <Guid>d0d3d149e82d4d2992a8116711c5acbe</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Text>Hora</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text9 Ref="15" type="Text" isKey="true">
+              <Brush>[250:192:143]</Brush>
+              <ClientRectangle>16.1,0,2.6,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <Guid>1f09ac6f27804cc5a5fca02a885c87bc</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Text>Tipo do Visitante</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text10 Ref="16" type="Text" isKey="true">
+              <Brush>[250:192:143]</Brush>
+              <ClientRectangle>18.7,0,3.7,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <Guid>6d1e0b760ee7483d953989a3ba34a5f0</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Text>Leitora</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text29 Ref="17" type="Text" isKey="true">
+              <Brush>[250:192:143]</Brush>
+              <ClientRectangle>22.4,0,4,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <Guid>2d5c451a9c374aa8abfd331541e59bee</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Text>Evento</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text1 Ref="18" type="Text" isKey="true">
+              <Brush>[250:192:143]</Brush>
+              <ClientRectangle>9.9,0,3,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <Guid>988863fde24a4f829eca753cedb40cbd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="6" />
+              <Parent isRef="9" />
+              <Text>Atendimento</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>ba7651f3b0944efe9d8c3abed1dd5641</Guid>
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <PrintOn>OnlyFirstPage</PrintOn>
+          <SortDirection>Descending</SortDirection>
+        </GroupHeaderBand1>
+        <DataBand1 Ref="19" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,2.96,27.7,0.5</ClientRectangle>
+          <Components isList="true" count="9">
+            <Text14 Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1.3,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,6.75,Regular,Point,False,0</Font>
+              <Guid>1c3a6eb2f8724b2487796f4a3577a3ce</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="6" />
+              <Parent isRef="19" />
+              <Text>{Events.DiaMes}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="21" type="DateFormat" isKey="true" />
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text34 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>2.8,0,4.4,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,6.75,Regular,Point,False,0</Font>
+              <Guid>d5883c99e02045988e4f4ef439146442</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="6" />
+              <Parent isRef="19" />
+              <Text>{Events.Firstname}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text34>
+            <Text5 Ref="23" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.2,0,2.7,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,6.75,Regular,Point,False,0</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="6" />
+              <Parent isRef="19" />
+              <Text>{Events.CPF}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text8 Ref="24" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.1,0,2.6,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,6.75,Regular,Point,False,0</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <NullValue>-</NullValue>
+              <Page isRef="6" />
+              <Parent isRef="19" />
+              <Text>{Events.tipo}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text11 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.9,0,3.2,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,6.75,Regular,Point,False,0</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="6" />
+              <Parent isRef="19" />
+              <Text>{Events.CHType}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text20 Ref="26" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18.7,0,3.7,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,6.75,Regular,Point,False,0</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="6" />
+              <Parent isRef="19" />
+              <Text>{Events.Leitora}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text21 Ref="27" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>22.4,0,4,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,6.75,Regular,Point,False,0</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="6" />
+              <Parent isRef="19" />
+              <Text>{Events.evento}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text2 Ref="28" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.9,0,3,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,6.75,Regular,Point,False,0</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <NullValue>-</NullValue>
+              <Page isRef="6" />
+              <Parent isRef="19" />
+              <Text>{Events.Atendimento}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text4 Ref="29" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.3,0,1.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,6.75,Regular,Point,False,0</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="6" />
+              <Parent isRef="19" />
+              <Text>{Events.Hora}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="30" type="TimeFormat" isKey="true">
+                <StringFormat>HH:mm:ss</StringFormat>
+              </TextFormat>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Events</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Guid>cce95df3a64e4173890916f6f299af3d</Guid>
+          <Name>DataBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <PrintOn>OnlyFirstPage</PrintOn>
+          <Sort isList="true" count="6">
+            <value>DESC</value>
+            <value>DiaMes</value>
+            <value>DESC</value>
+            <value>Hora</value>
+            <value>ASC</value>
+            <value>Firstname</value>
+          </Sort>
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>3cf404dd60b14b258daa30618e5672ea</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>21</PageHeight>
+      <PageWidth>29.7</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>9/14/2021 10:23:42 AM</ReportChanged>
+  <ReportCreated>8/25/2008 10:16:05 AM</ReportCreated>
+  <ReportGuid>1707a36075b9498484ea330f0e905c10</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2021.1.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        
+        public Report()
+        {
+            this.InitializeComponent();
+        }
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+	
+	public class Custom
+	{
+
+		public static string FormatCommaSeparatedParameter(string Column, string Parameters)
+		{
+			string query = "";
+			string[] param = Parameters.Split(new Char[]{','}); 
+
+			for (int i = 0; i &lt;= param.Length - 1; i++)
+			{
+				query += Column + " LIKE '" + param[i].Replace(".", "") + "'";
+				if (i &lt; param.Length - 1)
+				{
+					query += " OR ";
+				}
+			}   
+			return "(" + query + ")";
+		}
+	}
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="1">
+    <Odd Ref="31" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Brush>Gainsboro</Brush>
+      <Conditions isList="true" count="1">
+        <Item29 Ref="32" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <Placement>DataEvenStyle</Placement>
+          <PlacementNestedLevel>5</PlacementNestedLevel>
+        </Item29>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Odd</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>Black</TextBrush>
+    </Odd>
+  </Styles>
+</StiSerializer>

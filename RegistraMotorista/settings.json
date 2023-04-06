@@ -1,0 +1,135 @@
+{
+    "is_homolog" : true,
+
+    "api_uri_prd": "http://localhost/W-AccessAPI/v1/", 
+    "api_uri_hml": "http://localhost/W-AccessAPI/v1/", 
+
+    "api_user": "WAccessAPI",
+    "api_password": "#WAccessAPI#",
+
+    "corporate_prd_url" : "http://10.112.224.71:8888/SmartAPIHomologacao/api/ordemServico/registraMovimento",
+    "corporate_prd_hml" : "http://10.112.224.71:8888/SmartAPIHomologacao/api/ordemServico/registraMovimento",
+
+    "corporate_filial" : "VOPAK_ALEMOA_SMART",
+    "corporate_password_hml" : "7eb1b52ef062a2362df6197770ff6f85",
+
+    "drivers_ch_types": [
+        3
+    ],
+
+    "vehicle_ch_types": [
+        4,
+        8
+    ],
+
+    "visitor_ch_types": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7
+    ],
+
+    "valid_plate_tolerance_seconds": 30,
+    "total_plate_tolerance_seconds": 60,
+
+    "sql_server" : "BRALE1S006DB",
+    "sql_database" : "W_Access_Events",
+    "sql_user" : "w-access",
+    "sql_password" : "db_W-X-S@Wellcare924_",
+
+    "area_names_for_accreditation" : [
+        "R0", 
+        "T2", 
+        "T3"
+    ],
+     
+    "lpr_readers": [
+        {
+            "reader_id" : 40,
+            "reader_name" : "CAN006E.1.1",
+            "values" : [
+                {
+                    "id": 41,
+                    "lpr_name": "LPR006E1C1"
+                },
+                {
+                    "id": 81,
+                    "lpr_name": "LPR006E1C2"
+                },
+                {
+                    "id": 82,
+                    "lpr_name": "LPR006E1C3"
+                },
+                {
+                    "id": 83,
+                    "lpr_name": "LPR006E1C4"
+                },
+                {
+                    "id": 84,
+                    "lpr_name": "LPR006E1C5"
+                },
+                {
+                    "id": 86,
+                    "lpr_name": "LPR006E1C6"
+                }
+            ]
+        },
+        {
+            "reader_id" : 42,
+            "reader_name" : "CAN006E.2.1",
+            "values" : [
+                {
+                    "id": 43,
+                    "lpr_name": "LPR006E2C1"
+                },
+                {
+                    "id": 86,
+                    "lpr_name": "LPR006E2C2"
+                },
+                {
+                    "id": 87,
+                    "lpr_name": "LPR006E2C3"
+                },
+                {
+                    "id": 88,
+                    "lpr_name": "LPR006E2C4"
+                },
+                {
+                    "id": 89,
+                    "lpr_name": "LPR006E2C5"
+                },
+                {
+                    "id": 90,
+                    "lpr_name": "LPR006E2C6"
+                }
+            ]
+        },
+        {
+            "reader_id" : 44,
+            "reader_name" : "CAN006S.1.1",
+            "values" : [
+                {
+                    "id": 45,
+                    "lpr_name": "LPR006SC1"
+                },
+                {
+                    "id": 91,
+                    "lpr_name": "LPR006SC2"
+                }
+            ]
+        }
+    ],
+
+    "default_json_registra_movimento" :
+    {
+        "idCorporate": "",
+        "pontoControle": "",
+        "dtMovimento": "",
+        "tipoMov": "",
+        "idOcr": "",
+        "placaOcr": "",
+        "imagemOcr": ""
+    }
+}

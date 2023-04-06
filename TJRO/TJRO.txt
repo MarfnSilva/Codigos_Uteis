@@ -1,0 +1,45 @@
+https://webvpn-f5.tjro.jus.br/my.policy
+Acesso RDP
+Usuário: tjro\21830943898
+Senha: 21830@Tjr0
+
+sudo docker container ls ou stop ou restart + nome do container
+sudo apt-get purge docker.io -- remove app
+sudo rm -rf /var/lib/docker -- remove arquivos nas pastas
+
+sudo apt-get install  curl apt-transport-https ca-certificates software-properties-common
+
+root
+V2@tjrodigifort
+v2@tjrodigifort
+
+v2@ntgrdr
+
+aceso UBUNTU LINUX
+senha: v2@ntgrdr
+
+http://172.19.2.240/w-accessapi/private/meerkatevents
+
+
+MALVINA NUNES VIEIRA
+
+CHID 338573
+
+card 254826350
+
+id terminal 23671
+
+
+sZHNXy6Xpl8=
+sZHNXy6Xpl8=
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+%CHMain.CHType%
+%CHAux.AuxLst07%
+%CHAux.AuxChk06%
+
+%Contact.CHMain.CHID%
+%Contact.CHMain.PartitionID%
+%Contact.CHAux.AuxChk06%
+%Contact.CHAux.AuxText08%
+%Contact.CHAux.AuxText09%
+
+
+"1" "0" "False" "5546" "2" "False" "12" "13"
+
+
+%Contact.CHMain.CHID%
+AuxText07 : Idade %Contact.CHAux.AuxText07%
+AuxChk06 : Liberação supervisor %Contact.CHAux.AuxChk06%
+AuxText08 : Max Vis %Contact.CHAux.AuxText08%
+AuxText09 : Max Acomp %Contact.CHAux.AuxText09%
+Partition : %Contact.CHMain.PartitionID%

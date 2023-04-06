@@ -1,0 +1,30 @@
+{
+    "cd_multi_empresa": 8, 
+    "unidade": "HAC", 
+    "prontuario": 2949041, // OK
+    "atendimento": 3738152,  // OK
+    "tipo_atendimento": "Internação", 
+    ok > "vip": "Não", 
+    "nm_paciente": "PAULO RENATO DE OLIVEIRA", 
+    "utiliza_nome_social": "Não", 
+    "nm_social_paciente": null, 
+    "dt_nascimento": "30/07/1976", 
+    "cpf": "88532941591", 
+    "idade": 44, 
+    "sexo": "Masculino", 
+    "nm_responsavel": "PAULO RENATO DE OLIVEIRA", 
+    "parentesco_resp": "O MESMO", 
+    "fone_resp": None, 
+    "dt_atendimento": "08/06/2021 02:40:10", 
+    "dt_alta_hospitalar": None, 
+    "tipo_saida": None, 
+    "setor_origem": "EMERGENCIA ADULTO", 
+    "atendimento_filho": "Não", 
+    "atendimento_pai": None, 
+    "unidade_internacao": "UTI ADULTO 03", 
+    "ds_leito": "UTI3-32#", 
+    nr_ramal": None
+}
+
+
+T3lt3x@HAC22

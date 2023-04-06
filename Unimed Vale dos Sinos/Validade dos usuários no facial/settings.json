@@ -1,0 +1,14 @@
+{
+    "api_uri": "http://localhost/W-AccessAPI/v1/", 
+    "api_user": "WAccessAPI",
+    "api_password": "#WAccessAPI#",
+    "ch_types": [
+        2
+    ],
+
+    "ch_states": [
+        8,
+        0
+
+    ]
+}

@@ -1,0 +1,12 @@
+Usuário: W-Access
+Senha: db_W-X-S@Wellcare924_
+
+Usuário: W-Access_Reports
+Senha: _W-X-S@Wellcare924_rpt
+
+Usuário: sa
+Senha: #w_access_Adm#
+Validar os serviços do SQL
+Validar os serviços do w-access
+
+

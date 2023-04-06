@@ -1,0 +1,10 @@
+{
+    "lpr_server_ip": "172.16.17.66", 
+    "lpr_server_port": 8443,
+    "lpr_server_user": "administrator",
+    "lpr_server_pass": "#407107Adm#",
+    "lpr_server_hostname": "DESKTOP-EQ05QTE",
+
+    "SiteControllerIP": "172.16.17.15",
+    "SiteContollerPort" : 5500
+}

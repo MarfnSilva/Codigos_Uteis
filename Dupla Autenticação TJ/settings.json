@@ -1,0 +1,35 @@
+{
+    "id_gerenciador": 15,
+    "leitoras": [
+        {
+            "id_leitora": 19
+        },
+        {
+            "id_leitora": 20
+        },
+        {
+            "id_leitora": 0
+        },
+        {
+            "id_leitora": 0
+        },
+        {
+            "id_leitora": 0
+        },
+        {
+            "id_leitora": 0
+        },
+        {
+            "id_leitora": 0
+        },
+        {
+            "id_leitora": 0
+        }      
+        ],
+    "options": "ativar",
+    "servername": "NSP-USU-0098",
+    "userid": "sa",
+    "password": "#w_access_Adm#",
+    "databasename": "W_Access",
+    "odbcdriver": "{ODBC driver 17 for SQL Server}"
+}

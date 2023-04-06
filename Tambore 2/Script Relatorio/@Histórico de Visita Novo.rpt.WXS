@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="2">
+      <W_Access Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>W_Access</Alias>
+        <ConnectionStringEncrypted>9MDRyWFU+6RpezWlegSkHsRW1QlhW/PFYX3VmGHc4y/ndHetTUtzmONb2Rz0XKRew2D7jEhWsll7SSH0agQlZtlYc6FGbfP57XepzGHENSrkWt0rTQVaxeJhNf1zGK1nnVK168Zdc81waSVMYZQte8Zqtctha/OZ7USh/XwAd8vC0vXJXgPTpGlr7TTktK5njTCtSE5RE51yX+g=</ConnectionStringEncrypted>
+        <Key>6e9f2f10487a4c18b34aa72d0d6a3715</Key>
+        <Name>W_Access</Name>
+      </W_Access>
+      <W_Access_Events Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>W_Access_Events</Alias>
+        <ConnectionStringEncrypted>9Hhpyc1vS/Fwe6GYdQTg/8RW+QthfTGk7Hu9iPqEaTf+DK2txW17vGlb7dx6XK1ewxbZiUhKu1lvTf3E6QTj28NWdUhOCBrI7WuMBE5MbOfDDHMryU9DxWxNbQR4JfJni15Jq0ZdS81qbeXMapTjetMg/0hbCsP58U0VgW9M7GeNDM8oT3lLCXpc6DTrHKR7xFb1C195u91NCNn9cxjgP4tg</ConnectionStringEncrypted>
+        <Key>3809184f78ed4782b3c76d9896da74e7</Key>
+        <Name>W_Access_Events</Name>
+      </W_Access_Events>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Events Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Events</Alias>
+        <Columns isList="true" count="12">
+          <value>ORIGINAL,Firstname,Firstname,Firstname,System.String,_x0039_3a31c77b1a64cd399f5c3b9140bf6e2</value>
+          <value>ORIGINAL,CHType,CHType,CHType,System.String,_x0032_16d183713284d678949d3cc444c97ef</value>
+          <value>ORIGINAL,Leitora,Leitora,Leitora,System.String,_x0033_7afb2053aa24cbd924d3d82e890ac64</value>
+          <value>ORIGINAL,evento,evento,evento,System.String,da5b7b1aea8c4b72b46bd57b6f77ef56</value>
+          <value>ORIGINAL,Contato_Visitado,Contato_Visitado,Contato_Visitado,System.String,_x0032_ad41f028fe04ae79289d408fcb44233</value>
+          <value>ORIGINAL,N_Quadra,N_Quadra,N_Quadra,System.String,eaf3e2fc85894f6b8d33d141a7155f6e</value>
+          <value>ORIGINAL,DOCUMENTO,DOCUMENTO,DOCUMENTO,System.String,cf64c4cb5a424088b4f57a95db10a85e</value>
+          <value>ORIGINAL,N_Alamenda,N_Alamenda,N_Alamenda,System.String,_x0033_9629e0c280645999fa603b2b82a378b</value>
+          <value>ORIGINAL,Numero,Numero,Numero,System.String,_x0037_64daff912e74f198e9b07aaf62a6813</value>
+          <value>ORIGINAL,OBS,OBS,OBS,System.String,_x0039_34fa016a4934f4f8d6b43c684691d4e</value>
+          <value>ORIGINAL,VisitStart,VisitStart,VisitStart,System.String,d19cba09d6ad408a89129c55a65cee32</value>
+          <value>ORIGINAL,VisitEnd,VisitEnd,VisitEnd,System.String,a5a5749a23b341868643a842fba0fc99</value>
+        </Columns>
+        <CommandTimeout>90</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>a20507c2e58c47ea9f3e5ccc8359fef6</Key>
+        <Name>Events</Name>
+        <NameInSource>W_Access_Events</NameInSource>
+        <Parameters isList="true" count="6">
+          <value>_x0040_lblBD_StartTime_StartDate,Today.AddDays_x0028_-30_x0029_,4,100,a37b9f4f2aff490880532c731bbf7d23</value>
+          <value>_x0040_lblBD_EndTime_EndDate,Today,4,100,631b3b31315d466faa4f21ad27cae54e</value>
+          <value>_x0040_LoadParamsOnly,_x0031_,2,1,8a7d386a721145c79cf72e4c9cc9fa30</value>
+          <value>_x0040_lblBD_CHName,_x0022__x0025__x0022_,22,250</value>
+          <value>_x0040_lstBDA_AuxLst02_2,_x002D_1,8,250,c51f29f3e8264cdeb4ca3137fa9d2cc2</value>
+          <value>_x0040_lstBD_CHType,_x0030_,8,50</value>
+        </Parameters>
+        <SqlCommand>DECLARE
+@strQuery 						nvarchar(max),
+@ParmDefinition 				nvarchar(max),
+@_lblBD_StartTime_StartDate 	datetime,
+@_lblBD_EndTime_EndDate 		datetime,
+@_lblBD_CHName 					varchar(100),
+@_lstBDA_AuxLst02_2 			smallint,
+@_lstBD_CHType 					int
+
+	
+SET @strQuery =
+
+'
+
+Select 
+	VisitHistory.CHID,
+	VisitHistory.Firstname,
+	CHMain.IdNumber AS DOCUMENTO,
+	CfgCHTypes.strLanguage2 AS CHType,
+	VisitHistory.ContactCHID,
+	VisitHistory.ContactFirstName AS Contato_Visitado,
+	contact.AuxLst02 AS Quadra,
+	combo_unid.StrLanguage2	AS N_Quadra,
+	contact.AuxLst01 AS Alameda,
+	combo_Alameda.StrLanguage2	AS N_Alamenda,
+	contact.AuxText04 AS Numero,
+	dateadd(MINUTE,-180,VisitHistory.VisitStart) As VisitStart, 
+	dateadd(MINUTE,-180,VisitHistory.VisitEnd) AS VisitEnd,  
+	VisAuxTextA01 AS OBS
+		
+	From VisitHistory 
+JOIN W_Access..CHMain ON CHMain.CHID = VisitHistory.CHID 
+JOIN W_Access..CHAux on CHMain.CHID = CHAux.CHID
+JOIN W_Access..CfgCHTypes ON CfgCHTypes.CHType = CHMain.CHType
+LEFT JOIN W_Access..CHAux contact ON contact.chid = VisitHistory.ContactCHID
+LEFT JOIN W_Access..CHMain contact_chmain on VisitHistory.ContactCHID = contact_chmain.chid
+LEFT JOIN W_Access..CfgCHComboFields combo_unid ON contact.AuxLst02= combo_unid.ComboIndex AND combo_unid.FieldID = ''lstBDA_AuxLst02'' AND combo_unid.CHType = contact_chmain.CHType
+LEFT JOIN W_Access..CfgCHComboFields combo_Alameda ON  contact.AuxLst01 = combo_Alameda.ComboIndex AND combo_Alameda.FieldID= ''lstBDA_AuxLst01'' AND  combo_Alameda.CHType =  contact_chmain.CHType
+WHERE 
+VisitHistory.VisitStart BETWEEN @_lblBD_StartTime_StartDate AND @_lblBD_EndTime_EndDate
+
+'
+IF @lblBD_CHName &lt;&gt; '%'
+SET @strQuery = @strQuery + ' AND ' + '{WAccessEventsDBName}' + '..VisitHistory.FirstName LIKE @_lblBD_CHName'
+
+IF @lstBDA_AuxLst02_2 &gt; -1
+SET @strQuery = @strQuery + ' AND ' + 'contact.AuxLst02 = @_lstBDA_AuxLst02_2'
+
+IF @lstBD_CHType &gt; 0
+SET @strQuery = @strQuery + ' AND ' + '{WAccessDBName}' + '..CHMain.CHType = @_lstBD_CHType'
+
+SET @strQuery = @strQuery + ' ORDER BY VisitStart '
+
+SET @ParmDefinition = N'@_lblBD_StartTime_StartDate datetime,
+						@_lblBD_EndTime_EndDate datetime,
+						@_lblBD_CHName varchar(100),
+						@_lstBDA_AuxLst02_2 smallint,
+						@_lstBD_CHType int ';
+
+IF @LoadParamsOnly = 0
+	EXECUTE sp_executesql @strQuery, @ParmDefinition,
+						@_lblBD_StartTime_StartDate = @lblBD_StartTime_StartDate, 
+						@_lblBD_EndTime_EndDate = @lblBD_EndTime_EndDate,
+						@_lblBD_CHName = @lblBD_CHName,
+						@_lstBDA_AuxLst02_2 = @lstBDA_AuxLst02_2,
+						@_lstBD_CHType = @lstBD_CHType;</SqlCommand>
+      </Events>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="8">
+      <value>W-Access,ServerName,ServerName,,System.String,NSP-USU0032,False,False,False,False</value>
+      <value>W-Access,ApplicationName,ApplicationName,,System.String,W-Access,False,False,False,False</value>
+      <value>W-Access,ClientTimeZone,ClientTimeZone,,System.Int32,_x002D_180,False,False,False,False</value>
+      <value>W-Access,OperName,OperName,,System.String,Admin,False,False,False,False</value>
+      <value>W-Access,ProfileID,ProfileID,,System.Int32,_x0031_,False,False,False,False</value>
+      <value>W-Access,LanguageID,LanguageID,,System.Int32,_x0032_,False,False,False,False</value>
+      <value>W-Access,WAccessDBName,WAccessDBName,,System.String,W_Access,False,False,False,False</value>
+      <value>W-Access,WAccessEventsDBName,WAccessEventsDBName,,System.String,W_Access_Events,False,False,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV1</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>7742fe7b21f94bd6930bd0585e583bc5</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="2">
+    <Page1 Ref="5" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="4">
+        <PageHeaderBand1 Ref="6" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,33.6,0.51</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text22 Ref="7" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,15.31,0.76</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,16,Bold</Font>
+              <Guid>fd786dcc38c943ff838de06472730e2d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>Histórico Visitantes / Prestador de Serviço</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text23 Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.8,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,6,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{Events.Parameters["@lstBDA_AuxLst02_2"].ParameterValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>13fb103fd7554b95a7e54a7fa3db8b65</Guid>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand1>
+        <PageFooter2 Ref="9" type="PageFooterBand" isKey="true">
+          <Border>Top;[255:133:0];3;Solid;False;3;[255:133:0]</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,19.1,33.6,0.5</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text15 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20,0.1,7.7,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>10fe7b23e8e947a9bdb2902b0d134f3a</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="5" />
+              <Parent isRef="9" />
+              <Text>{IIF(LanguageID==1,"Page "+PageNumber+" of "+TotalPageCount,"")}{IIF(LanguageID==2,"Página "+PageNumber+" de "+TotalPageCount,"")}{IIF(LanguageID==3,"Página "+PageNumber+" de "+TotalPageCount,"")}{IIF(LanguageID==4,"Page "+PageNumber+" of "+TotalPageCount,"")}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text16 Ref="11" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.1,8.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>2824955d26784fc7937bb14ac15b6e50</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="5" />
+              <Parent isRef="9" />
+              <Text>{Time}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text18 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.6,0.1,11.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8.25,Bold,Point,False,0</Font>
+              <Guid>90ad5849fe434004ad70863c47a055b1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="5" />
+              <Parent isRef="9" />
+              <Text>{IIF(LanguageID==1,"Operator:  ","")}{IIF(LanguageID==2,"Operador:  ","")}{IIF(LanguageID==3,"Operador:  ","")}{IIF(LanguageID==4,"Operator:  ","")}{OperName}</Text>
+              <TextBrush>[60:60:60]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>f0e04e4b137b4c50a5f375fcfe25d095</Guid>
+          <Name>PageFooter2</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageFooter2>
+        <GroupHeaderBand1 Ref="13" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.71,33.6,0.8</ClientRectangle>
+          <Components isList="true" count="9">
+            <Text1 Ref="14" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.09,7.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="5" />
+              <Parent isRef="13" />
+              <Text>Nome Visitante </Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text3 Ref="15" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.2,0.09,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="5" />
+              <Parent isRef="13" />
+              <Text>Documento</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text5 Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.8,0.09,3.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="5" />
+              <Parent isRef="13" />
+              <Text>Alameda Visitada</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text6 Ref="17" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.6,0.09,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="5" />
+              <Parent isRef="13" />
+              <Text>Numero</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text7 Ref="18" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20.4,0.09,6.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="5" />
+              <Parent isRef="13" />
+              <Text>Contato da Visita</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text20 Ref="19" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.6,0.09,3.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="5" />
+              <Parent isRef="13" />
+              <Text>Tipo do Usuário </Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text21 Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18,0.09,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="5" />
+              <Parent isRef="13" />
+              <Text>Quadra / Lote</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text10 Ref="21" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>26.6,0.09,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="5" />
+              <Parent isRef="13" />
+              <Text>Inicio da Visita</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text12 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>30.2,0.09,3.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,8,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="5" />
+              <Parent isRef="13" />
+              <Text>Observação</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </GroupHeaderBand1>
+        <DataBand1 Ref="23" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,3.31,33.6,1</ClientRectangle>
+          <Components isList="true" count="9">
+            <Text2 Ref="24" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.09,7.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="5" />
+              <Parent isRef="23" />
+              <Text>{Events.Firstname}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text14 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20.4,0.09,6.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="5" />
+              <Parent isRef="23" />
+              <Text>{Events.Contato_Visitado}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text17 Ref="26" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.6,0.09,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="5" />
+              <Parent isRef="23" />
+              <Text>{Events.Numero}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text19 Ref="27" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.8,0.09,3.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="5" />
+              <Parent isRef="23" />
+              <Text>{Events.N_Alamenda}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text11 Ref="28" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.6,0.09,3.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="5" />
+              <Parent isRef="23" />
+              <Text>{Events.CHType}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text13 Ref="29" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18,0.09,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="5" />
+              <Parent isRef="23" />
+              <Text>{Events.N_Quadra}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text4 Ref="30" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.2,0.09,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="5" />
+              <Parent isRef="23" />
+              <Text>{Events.DOCUMENTO}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text9 Ref="31" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>30.2,0.09,3.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Verdana,7,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="5" />
+              <Parent isRef="23" />
+              <Text>{Events.OBS}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text8 Ref="32" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>26.6,0.09,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,7,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="5" />
+              <Parent isRef="23" />
+              <Text>{Events.VisitStart}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Events</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>3cf404dd60b14b258daa30618e5672ea</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>21.6</PageHeight>
+      <PageWidth>35.6</PageWidth>
+      <PaperSize>Legal</PaperSize>
+      <Report isRef="0" />
+    </Page1>
+    <Page2 Ref="33" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="0" />
+      <Conditions isList="true" count="0" />
+      <Enabled>False</Enabled>
+      <Expressions isList="true" count="0" />
+      <Guid>dfd7f5e530a9473da361492100cffb99</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page2</Name>
+      <PageHeight>27.94</PageHeight>
+      <PageWidth>21.59</PageWidth>
+      <PaperSize>Letter</PaperSize>
+      <Report isRef="0" />
+    </Page2>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>10/5/2021 2:14:52 PM</ReportChanged>
+  <ReportCreated>8/25/2008 10:16:05 AM</ReportCreated>
+  <ReportGuid>9c4041fca6d64fa094c78bf8a4c44543</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2021.1.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        
+        public Report()
+        {
+            this.InitializeComponent();
+        }
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+	
+	public class Custom
+	{
+
+		public static string FormatCommaSeparatedParameter(string Column, string Parameters)
+		{
+			string query = "";
+			string[] param = Parameters.Split(new Char[]{','}); 
+
+			for (int i = 0; i &lt;= param.Length - 1; i++)
+			{
+				query += Column + " LIKE '" + param[i].Replace(".", "") + "'";
+				if (i &lt; param.Length - 1)
+				{
+					query += " OR ";
+				}
+			}   
+			return "(" + query + ")";
+		}
+	}
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="1">
+    <Odd Ref="34" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Brush>Gainsboro</Brush>
+      <Conditions isList="true" count="1">
+        <Item34 Ref="35" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <Placement>DataEvenStyle</Placement>
+          <PlacementNestedLevel>5</PlacementNestedLevel>
+        </Item34>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Odd</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>Black</TextBrush>
+    </Odd>
+  </Styles>
+</StiSerializer>

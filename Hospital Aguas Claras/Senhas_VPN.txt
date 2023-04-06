@@ -1,0 +1,13 @@
+1º Conectar numa rede externa com acesso à internet.
+
+2º Abrir na área de trabalho o programa FortiClient.
+
+3º Acessar a aba ACESSO REMOTO.
+
+4º Selecionar nome da VPN : REDE IMPAR.
+
+5º Login de rede : t309667358.invenzi@adhosp.com.br
+
+6º Senha de rede: @L!u*GJ9 --- Dasa@2022!
+
+7º Inserir token que será enviado para o telefone cadastrado (+55-11 988296029).

@@ -1,0 +1,165 @@
+{
+ 
+    "api_uri": "http://localhost/W-AccessAPI/v1/", 
+    "api_user": "WAccessAPI",
+    "api_password": "#WAccessAPI#",
+
+    "face_multi_factor_ch_types": [
+        2,
+        3,
+        7
+    ],
+
+    "meerket_ip_servers": [
+        {
+            "meerkat_server_ip": "http://10.6.102.78/frapi",
+            "localidade": "Ariquemes",
+            "appKey": "73c981dde13840a2abdf8c0891024e8f"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.115.49/frapi",
+            "localidade": "Garajá Mirim",
+            "appKey": "95f07c975a184406add92a1c9e24d747"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.121.40/frapi",
+            "localidade": "Buritis - Jorge Gurgel",
+            "appKey": "3c3270fc336b4aaea6fb639a26351b24"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.121.40/frapi",
+            "localidade": "Ji Paraná",
+            "appKey": "ff6f885aa5e84dbb9c90ce6e72c8f7c7"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.103.52/frapi",
+            "localidade": "Jaru - Victor Nunes",
+            "appKey": "1a9c741f7f6e4d5389ce4a01a7d8299d"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.104.57/frapi",
+            "localidade": "Ouro Preto - Cassio Rodolfo",
+            "appKey": "9559ba9279814a2281a946fdbf6fc590"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.106.42/frapi",
+            "localidade": "Precidente Medici - Prontes Miranda",
+            "appKey": "70cff5a54a8346cd8e53e337cb43c82e"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.111.41/frapi",
+            "localidade": "Alvorada do Oeste - Jurista Julio Guimaraes",
+            "appKey": "77857613d356409d9bb596b1ef308b4b"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.117.45/frapi",
+            "localidade": "Alta Floresta do Oeste",
+            "appKey": "f9724c89aa6349618a04b31f65d08b20"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.110.48/frapi",
+            "localidade": "Rolim Moura",
+            "appKey": "1245a4ec4266447cb7b9700abfdd24e9"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.116.51/frapi",
+            "localidade": "Costas Marques",
+            "appKey": "afef85bd2b634364af51b001374083db"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.118.49/frapi",
+            "localidade": "Santa Luzia do Oeste",
+            "appKey": "5c77dfabd5db40ca8cf2244f38cab8ff"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.123.41/frapi",
+            "localidade": "São Francisco do Guaporé",
+            "appKey": "deb059d9deb445c5afd10fec28b49946"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.122.44/frapi",
+            "localidade": "São Miguel do Guaporé",
+            "appKey": "61f2440c71f546efb98b2463c6b3cf19"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.120.43/frapi",
+            "localidade": "Nova Brasilandia",
+            "appKey": "197d55d5e16a4c22bdffdb88f96cf0e0"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.107.39/frapi",
+            "localidade": "Cacoal",
+            "appKey": "fedb98c3e0074fb7ae855c25f6a473d1"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.113.45/frapi",
+            "localidade": "Cerejeiras",
+            "appKey": "bf42772409724cab92f2f6c616545adf"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.112.42/frapi",
+            "localidade": "Colorado do Oeste",
+            "appKey": "8c64e6054c8b4baca49d656f6f9f00db"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.108.42/frapi",
+            "localidade": "Espigão do Oeste",
+            "appKey": "bddf505a698e4ecda191f4485a5f7d1b"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.109.43/frapi",
+            "localidade": "Pimenta Bueno",
+            "appKey": "2139c766db2c43c49397403f85d90b55"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.114.53/frapi",
+            "localidade": "Vilhena",
+            "appKey": "4de3f46a612341ecae3c2c9f8c11ceed"
+        },
+        {
+            "meerkat_server_ip": "http://10.6.119.47/frapi",
+            "localidade": "Machadinho",
+            "appKey": "ea8b98f299544c1abfbf58648bee0685"
+        }
+    ],
+
+    "meerkat_servers": [
+        {
+            "meerkat_server_ip": "17",
+            "readerid": 191,
+            "catraca": "",
+            "direcao": "",
+            "gate": "PV1"
+        },
+        {
+            "id": 489,
+            "catraca": "",
+            "direcao": "",
+            "gate": "PV1"
+        },
+        {
+            "id": 490,
+            "catraca": "",
+            "direcao": "",
+            "gate": "PV1"
+        },
+        {
+            "id": 523,
+            "catraca": "",
+            "direcao": "",
+            "gate": "PV1"
+        },
+        {
+            "id": 524,
+            "catraca": "",
+            "direcao": "",
+            "gate": "PV1"
+        },
+        {
+            "id": 525,
+            "catraca": "",
+            "direcao": "",
+            "gate": "PV1"
+        }
+    ]
+}

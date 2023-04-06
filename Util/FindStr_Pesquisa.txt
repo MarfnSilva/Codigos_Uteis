@@ -1,0 +1,3 @@
+find . -name *.html -exec grep """<Entre com o trecho buscado>""" "{}" ";"
+
+findstr "Entre com o trecho buscado" *.txt

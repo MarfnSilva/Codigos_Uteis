@@ -1,0 +1,23 @@
+Grupo
+dias pares - 131, 135, 138, 141
+dias impares - 132, 136, 139, 142
+
+access lvl
+
+
+
+
+Café da manhã
+Bandejão 06:00- 08:00
+
+Almoço
+Bandejão  11:00 - 15:30
+Lanchonete 11:00- 17:00
+Vip 11:00- 15: 30
+
+Janta
+Bandejão 18:15 - 20:00
+
+
+1000003080
+17179869183

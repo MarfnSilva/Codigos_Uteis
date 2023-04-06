@@ -1,0 +1,30 @@
+Integração de Funcionários: Responsavel por add e atualizar os funcionários
+Processos:
+1 - Consulta todos funcionarios no W-Access
+2 - Consulta todos funcionarios na View Unimed
+3 - Verifica se tem atendimento ativo, férias, afastamento ou demissão
+4 - Compara as diferenças nos dados
+5 - Atualiza o usuário com base nos dados da View caso haja necessidade
+
+Roda como serviço do Windows
+Executa a cada 1 minuto + o tempo de processamento da interação anterior
+No diretório contem Executavel, Trace e arquivo de configuração.
+
+----------------------------------------------------------------------------------
+
+Integração de Cooperados: Responsavel por add e atualizar os cooperados(Médicos)
+Processos:
+1 - Consulta todos cooperados no W-Access
+2 - Consulta todos cooperados na View Unimed
+3 - Verifica se tem atendimento ativo, férias, afastamento ou demissão
+4 - Compara as diferenças nos dados
+5 - Atualiza o usuário com base nos dados da View caso haja necessidade
+
+Roda como serviço do Windows
+Executa a cada 20 segundos + o tempo de processamento da interação anterior
+No diretório contem Executavel, Trace e arquivo de configuração.
+
+
+
+
+

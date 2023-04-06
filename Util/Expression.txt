@@ -1,0 +1,6 @@
+
+Somente letras, quantidate de 6 a 80
+^[A-z\s]{6,80}$
+
+
+https://regex101.com/
